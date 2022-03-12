@@ -2,14 +2,14 @@ import json
 import csv 
 
 # Reference the JSON file that is created using the API
-filename = 'tiktok-sample.json'
-with open(filename, 'r') as infile:
-    data = infile.read()
-    new_data = data.replace('}\n{', '},{')
-    tiktok_data = json.loads(f'[{new_data}]')
+filename = 'trending.json'
+f = open(filename)
+tiktok_data = json.load(f)
 
-with open('tiktok-sample.csv', 'w', newline='') as file:
+# Writing into CSV
+with open('tiktok-trending.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["TikTok ID", "Music ID", "Music Title", "Music URL", "Play Count" ])
-    for tiktok_object in tiktok_data: 
-        writer.writerow([tiktok_object['id'], tiktok_object['music']['id'], tiktok_object['music']['title'], tiktok_object['music']['playUrl'], tiktok_object['stats']['playCount']])
+    writer.writerow(["TikTok ID", "User Verified", "Music ID", "Music Title", "Music Author", "Music URL", "Video Duration", "Play Count" ])
+    for tiktok_object in tiktok_data['collector']: 
+        writer.writerow([tiktok_object['id'], tiktok_object['authorMeta']['verified'], tiktok_object['musicMeta']['musicId'], tiktok_object['musicMeta']['musicName'], tiktok_object['musicMeta']['musicAuthor'], tiktok_object['musicMeta']['playUrl'], tiktok_object['videoMeta']['duration'], tiktok_object['playCount']])
+f.close()
