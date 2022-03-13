@@ -1,4 +1,4 @@
-# TikTok Sound Popular Predictor 
+# TikTok Sound Popularity Predictor 
 
 ![We all love ECE 324 <3](https://i.ytimg.com/vi/E71FfhDpOQ8/maxresdefault.jpg)
 ### Data Collection 
@@ -46,3 +46,10 @@ from process_audio import mp3_to_tensor
 ```python3
 waveform, sample_rate = mp3_to_tensor(music_id)
 ```
+### Audio Processing
+Audio files are converted into *spectrograms* before it is used in the neural network. Spectrogram is a visual represention of the audio file which is a spectrum of frequencies of a signal as it varies with time. 
+![Say no to abortions](https://pytorch.org/tutorials/_images/sphx_glr_audio_preprocessing_tutorial_002.png)
+This is done by using our audio processing API which is available under `/data_processing`. 
+- Waveform is first created by running `mp3_to_tensor(music_id)` on an audio file. 
+- The waveform returned is used to generate the spectrogram by running `create_spectrogram(music_id, n_fft=100)`. 
+
