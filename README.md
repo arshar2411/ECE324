@@ -1,4 +1,6 @@
-# ECE324
+# TikTok Sound Popular Predictor 
+
+![We all love ECE 324 <3](https://i.ytimg.com/vi/E71FfhDpOQ8/maxresdefault.jpg)
 ### Data Collection 
 After you have cloned the repository, you should have `tiktok-trending.csv` dataset on your local machine inside the `/data_collection` directory. 
 Some Python libraries that you will need to work with the Data Collection API are: 
