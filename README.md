@@ -6,7 +6,7 @@ Some Python libraries that you will need to work with the Data Collection API ar
 - Playwright 
 - Torch 
 - TorchAudio
-##### Downloading the audio files 
+#### Downloading the audio files 
 While you are inside the `/data_collection` directory, create a new directory `/downloadedMp3`. 
 > Its important that you have the exact same spelling. 
 Run the follwing command from `/data_collection`: 
@@ -32,7 +32,7 @@ ECE324
    
 
 ```
-##### Using the audio files as inputs to a neural network 
+#### Using the audio files as inputs to a neural network 
 The audio files (in mp3 format) can be transformed into Pytorch tensors which would make them appropriate for use in Pytorch neural networks. 
 Every audio file has a unique ID which can be seen from `tiktok-trending.csv` dataset. (This is the Music ID column)
 To transform the audio file into a Pytorch Tensor which represents its waveform, 
