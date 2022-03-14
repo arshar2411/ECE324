@@ -57,6 +57,7 @@ This is done by using our audio processing API which is available under `/data_p
 
 For our current implementation of the model, solely waveform data was used. 
 > Later we will introduce additional features from the video and audio’s metadata as this will improve accuracy of our model by adding more appropriate contextual data. 
+
 Four blocks of convolutional layers to learn the different features of the audio as suggested by some past work. Each of the block looks like: 
 ```python3 
 self.L1 = nn.Sequential(
