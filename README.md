@@ -52,4 +52,17 @@ Audio files are converted into *spectrograms* before it is used in the neural ne
 This is done by using our audio processing API which is available under `/data_processing`. 
 - Waveform is first created by running `mp3_to_tensor(music_id)` on an audio file. 
 - The waveform returned is used to generate the spectrogram by running `create_spectrogram(music_id, n_fft=100)`. 
-
+### Model
+For our current implementation of the model, solely waveform data was used. 
+> later we will introduce additional features from the video and audio’s metadata as this will improve accuracy of our model by adding more appropriate contextual data. 
+Four blocks of convolutional layers to learn the different features of the audio as suggested by some past work. Each of the block looks like: 
+```python3 
+self.L1 = nn.Sequential(
+            nn.Conv2d(2,x_train[0].shape[1],kernel_size=(5,5),stride=(2,2),padding =(2,2)),
+            nn.ReLU(),
+            nn.BatchNorm2d(x_train[0].shape[1]),
+            nn.init.kaiming_normal_(self.L1[0].weight, a=0.1),
+            self.L1[0].bias.data.zero_()
+        )
+```
+An Adam optimizer, `torch.optim.Adam(model.parameters(),learning_rate)` and the mean-squared-error loss was used to update the weights of the model. 
