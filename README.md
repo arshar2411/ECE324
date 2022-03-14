@@ -65,4 +65,4 @@ self.L1 = nn.Sequential(
             self.L1[0].bias.data.zero_()
         )
 ```
-An Adam optimizer, `torch.optim.Adam(model.parameters(),learning_rate)` and the mean-squared-error loss was used to update the weights of the model. 
+An Adam optimizer, `torch.optim.Adam(model.parameters(),learning_rate)` and the mean-squared-error loss, `nn.MSELoss()` was used to update the weights of the model. 
