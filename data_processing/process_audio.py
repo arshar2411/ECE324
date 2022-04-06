@@ -18,7 +18,6 @@ def create_spectrogram(music_id, n_fft=100):
 
 def create_mfcc(music_id, n_fft=100):
   waveform, sample_rate = mp3_to_tensor(music_id)
-  n_fft = 400.0
   frame_length = n_fft / sample_rate * 1000.0
   frame_shift = frame_length / 2.0
 
