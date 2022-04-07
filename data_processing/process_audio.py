@@ -16,37 +16,58 @@ def create_spectrogram(music_id, n_fft=100):
    return output
 
 
-def create_mfcc(music_id, n_fft=100):
-  waveform, sample_rate = mp3_to_tensor(music_id)
-  frame_length = n_fft / sample_rate * 1000.0
-  frame_shift = frame_length / 2.0
+# def create_mfcc(music_id, n_fft=100):
+#   waveform, sample_rate = mp3_to_tensor(music_id)
+#   frame_length = n_fft / sample_rate * 1000.0
+#   frame_shift = frame_length / 2.0
 
-  params = {
-    "channel": 0,
-    "dither": 0.0,
-    "window_type": "hanning",
-    "frame_length": frame_length,
-    "frame_shift": frame_shift,
-    "remove_dc_offset": False,
-    "round_to_power_of_two": False,
-    "sample_frequency": sample_rate,
-  }
-  mfcc = torchaudio.compliance.kaldi.mfcc(waveform, **params)
-  return mfcc 
+#   params = {
+#     "channel": 0,
+#     "dither": 0.0,
+#     "window_type": "hanning",
+#     "frame_length": frame_length,
+#     "frame_shift": frame_shift,
+#     "remove_dc_offset": False,
+#     "round_to_power_of_two": False,
+#     "sample_frequency": sample_rate,
+#   }
+#   mfcc = torchaudio.compliance.kaldi.mfcc(waveform, **params)
+#   return mfcc 
+
+def create_mfcc(sample_rate, n_mfcc, n_fft, hop_length): 
+  """
+  Build mfcc for a given torchaudio waveform 
+
+  :param signal(tensor): waveform
+  :param sample_rate (int) : ykik
+  :param n_mfcc (int) : ykik
+  :param n_fft (int) : ykik
+  :param hop_length (int) : ykik
+  """
+  mfcc = torchaudio.transforms.MFCC(
+    sample_rate=sample_rate,
+    n_mfcc=n_mfcc,
+    melkwargs={
+        "n_fft": n_fft,
+        "hop_length": hop_length,
+    },
+    
+)
+  return mfcc
 
 def print_stats(waveform, sample_rate=None, src=None):
- if src:
-   print("-" * 10)
-   print("Source:", src)
-   print("-" * 10)
- if sample_rate:
-   print("Sample Rate:", sample_rate)
- print("Shape:", tuple(waveform.shape))
- print("Dtype:", waveform.dtype)
- print(f" - Max:     {waveform.max().item():6.3f}")
- print(f" - Min:     {waveform.min().item():6.3f}")
- print(f" - Mean:    {waveform.mean().item():6.3f}")
- print(f" - Std Dev: {waveform.std().item():6.3f}")
- print()
- print(waveform)
- print()
+  if src:
+    print("-" * 10)
+    print("Source:", src)
+    print("-" * 10)
+  if sample_rate:
+    print("Sample Rate:", sample_rate)
+  print("Shape:", tuple(waveform.shape))
+  print("Dtype:", waveform.dtype)
+  print(f" - Max:     {waveform.max().item():6.3f}")
+  print(f" - Min:     {waveform.min().item():6.3f}")
+  print(f" - Mean:    {waveform.mean().item():6.3f}")
+  print(f" - Std Dev: {waveform.std().item():6.3f}")
+  print()
+  print(waveform)
+  print()
