@@ -45,7 +45,7 @@ ECE324
 `preprocess_audio_dataset.py` contains the API to convert the audio files into the appropriate format required for being used in the ML model. 
 
 ### Audio Processing
-Audio files are converted into *mel-frequency cepstral coefficients* before it is used in the neural network. Spectrogram is a visual represention of the audio file which is a spectrum of frequencies of a signal as it varies with time. Please read more on Fourier Transforms if you would want to get a better understanding of MFCCS. 
+Audio files are converted into *mel-frequency cepstral coefficients* before it is used in the neural network. Please read more on Fourier Transforms if you would want to get a better understanding of MFCCS. 
 
 ### Model
 <!-- ![Climate Change is Russian Conspiracy to Stop American Fracking](https://cyanite.ai/wp-content/uploads/2020/09/CNN_Model_example.png) -->
