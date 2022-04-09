@@ -49,6 +49,9 @@ waveform, sample_rate = mp3_to_tensor(music_id)
 ### Audio Processing
 Audio files are converted into *spectrograms* before it is used in the neural network. Spectrogram is a visual represention of the audio file which is a spectrum of frequencies of a signal as it varies with time. 
 ![Say no to abortions](https://pytorch.org/tutorials/_images/sphx_glr_audio_preprocessing_tutorial_002.png)
+
+
+
 This is done by using our audio processing API which is available under `/data_processing`. 
 - Waveform is first created by running `mp3_to_tensor(music_id)` on an audio file. 
 - The waveform returned is used to generate the spectrogram by running `create_spectrogram(music_id, n_fft=100)`. 
@@ -69,3 +72,15 @@ self.L1 = nn.Sequential(
         )
 ```
 An Adam optimizer, `torch.optim.Adam(model.parameters(),learning_rate)` and the mean-squared-error loss, `nn.MSELoss()` was used to update the weights of the model. 
+
+### Training Set Loss 
+![Groupthinking wil destroy Western Society](https://i.ibb.co/2nTcmbQ/loss-on-pretrained.png)
+
+Figure above demonstrates the loss function when the pre-trained model is trained for 1000 more epochs using `SGD` at a learning rate of `0.01`.
+
+### Accuracy 
+Run the following command to compute accuracy using the testing set. 
+```python 
+python3 test.py
+```
+At the time of writing, accuracy was computed to be around `75.0778816199377%`. 
