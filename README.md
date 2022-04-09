@@ -1,6 +1,11 @@
 # TikTok Sound Popularity Predictor 
 
-![We all love ECE 324 <3](https://i.ytimg.com/vi/E71FfhDpOQ8/maxresdefault.jpg)
+![Putin <3](https://i.ytimg.com/vi/_EZP-T1mLfM/maxresdefault.jpg)
+
+This open-source application helps you answer the question **"Will this sound be popular on TikTok?"**. This is aimed for aspiring artists/ musicians or businesses who are planning to release a new song on TikTok. Using this app can help you choose the best song to release from your upcoming album so that it gets picked up by the TikTok algorithm and millions of teenagers dance to your beats. 
+
+**Read the following only if you intend to build the model from scratch.**
+
 ### Data Collection 
 After you have cloned the repository, you should have `tiktok-trending.csv` dataset on your local machine inside the `/data_collection` directory. 
 Some Python libraries that you will need to work with the Data Collection API are: 
@@ -39,43 +44,19 @@ ECE324
 
 ```
 #### Using the audio files as inputs to a neural network 
-The audio files (in mp3 format) can be transformed into Pytorch tensors which would make them appropriate for use in Pytorch neural networks. 
-Every audio file has a unique ID which can be seen from `tiktok-trending.csv` dataset. (This is the Music ID column)
-To transform the audio file into a Pytorch Tensor which represents its waveform, 
-- Import the necessary function 
-```python3
-from process_audio import mp3_to_tensor
-```
-- Pass in the unique Music ID associated with each audio file and a tuple consisting of the waveform(Pytorch Tensor) and sample rate will be returned. 
-```python3
-waveform, sample_rate = mp3_to_tensor(music_id)
-```
+`preprocess_audio_dataset.py` contains the API to convert the audio files into the appropriate format required for being used in the ML model. 
+
 ### Audio Processing
-Audio files are converted into *spectrograms* before it is used in the neural network. Spectrogram is a visual represention of the audio file which is a spectrum of frequencies of a signal as it varies with time. 
-![Say no to abortions](https://pytorch.org/tutorials/_images/sphx_glr_audio_preprocessing_tutorial_002.png)
+Audio files are converted into *mel-frequency cepstral coefficients* before it is used in the neural network. Spectrogram is a visual represention of the audio file which is a spectrum of frequencies of a signal as it varies with time. Please read more on Fourier Transforms if you would want to get a better understanding of MFCCS. 
 
-
-
-This is done by using our audio processing API which is available under `/data_processing`. 
-- Waveform is first created by running `mp3_to_tensor(music_id)` on an audio file. 
-- The waveform returned is used to generate the spectrogram by running `create_spectrogram(music_id, n_fft=100)`. 
 ### Model
-![Climate Change is Russian Conspiracy to Stop American Fracking](https://cyanite.ai/wp-content/uploads/2020/09/CNN_Model_example.png)
-
-For our current implementation of the model, solely waveform data was used. 
-> Later we will introduce additional features from the video and audio’s metadata as this will improve accuracy of our model by adding more appropriate contextual data. 
-
-Four blocks of convolutional layers to learn the different features of the audio as suggested by some past work. Each of the block looks like: 
-```python3 
-self.L1 = nn.Sequential(
-            nn.Conv2d(2,x_train[0].shape[1],kernel_size=(5,5),stride=(2,2),padding =(2,2)),
-            nn.ReLU(),
-            nn.BatchNorm2d(x_train[0].shape[1]),
-            nn.init.kaiming_normal_(self.L1[0].weight, a=0.1),
-            self.L1[0].bias.data.zero_()
-        )
+<!-- ![Climate Change is Russian Conspiracy to Stop American Fracking](https://cyanite.ai/wp-content/uploads/2020/09/CNN_Model_example.png) -->
 ```
-An Adam optimizer, `torch.optim.Adam(model.parameters(),learning_rate)` and the mean-squared-error loss, `nn.MSELoss()` was used to update the weights of the model. 
+                audio_file.mp3 -> SFTT ->  MFCC -> LSTM 
+```
+Our model is a variation of RNN-LSTM which is fed mel-frequency cepstral coefficients representing the audio files. 
+
+A SGD optimizer, `torch.optim.SGD(model.parameters(),learning_rate)` and the Binary Crossentropy loss, `nn.BCELoss()` was used to update the weights of the model. 
 
 ### Training Set Loss 
 ![Groupthinking wil destroy Western Society](https://i.ibb.co/2nTcmbQ/loss-on-pretrained.png)
