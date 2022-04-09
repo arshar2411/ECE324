@@ -6,9 +6,7 @@ This open-source application helps you answer the question **"Will this sound be
 
 **Read the following only if you intend to build the model from scratch.**
 
-### Data Collection 
-After you have cloned the repository, you should have `tiktok-trending.csv` dataset on your local machine inside the `/data_collection` directory. 
-Some Python libraries that you will need to work with the Data Collection API are: 
+### Required Libraries 
 - Pandas
 - Playwright 
 - Torch 
