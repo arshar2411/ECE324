@@ -8,6 +8,10 @@ Some Python libraries that you will need to work with the Data Collection API ar
 - Playwright 
 - Torch 
 - TorchAudio
+- tqdm 
+- sklearn
+- Numpy
+
 #### Downloading the audio files 
 While you are inside the `/data_collection` directory, create a new directory `/downloadedMp3`. 
 > Its important that you have the exact same spelling. 
