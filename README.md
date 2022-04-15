@@ -4,7 +4,7 @@
 
 This open-source application helps you answer the question **"Will this sound be popular on TikTok?"**. This is aimed for aspiring artists/ musicians or businesses who are planning to release a new song on TikTok. Using this app can help you choose the best song to release from your upcoming album so that it gets picked up by the TikTok algorithm and millions of teenagers dance to your beats. 
 
-**Read the following only if you intend to build the model from scratch.**
+
 
 ### Required Libraries 
 - Pandas
@@ -14,6 +14,17 @@ This open-source application helps you answer the question **"Will this sound be
 - tqdm 
 - sklearn
 - Numpy
+
+### Directories 
+#### `/data_collection`
+This contains the scripts to download the dataset used for the model and a sample csv dataset as an example. 
+#### `/data_processing`
+This contains the API used to download and process the audio files to the appropriate format to be used as inputs in our neural network. 
+#### `/model`
+`/model` contains both the LSTM model definition as well as the testing and training scripts used in the model. The model weights are also available in this directory. 
+
+
+**Read the following only if you intend to build the model from scratch.**
 
 #### Downloading the audio files 
 While you are inside the `/data_collection` directory, create a new directory `/downloadedMp3`. 
